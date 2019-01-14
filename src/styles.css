@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+.wrapper {
+    min-height: 100%;      
+    margin-bottom: -50px;
+  }
+
+#footer,
+.push {
+  height: 150px;
+}
+
+#header .container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}

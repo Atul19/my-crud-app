@@ -1,0 +1,54 @@
+<div class="alert alert-success" role="alert" *ngIf="message">
+  {{message}}
+</div>
+
+<table mdbTable striped="true">
+  <thead>
+    <tr>
+      <th *ngFor="let head of headElements" scope="col" width="30%">{{head}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let task of tasks">
+      <td>{{task.title}}</td>
+      <td>{{task.description}}</td>
+      <td>
+        <button type="button" mdbBtn color="danger" mdbWavesEffect (click)="onDelete(task.name)">Delete</button>
+        <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="onUpdate(task.name)">Update</button>
+      </td>
+    </tr>
+    <ng-template [ngIf]="showTaskForm">
+      <tr>
+        <td colspan="3">
+          <!-- Default form row -->
+          <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+            <!-- Grd row -->
+            <div class="form-row">
+              <!-- Grid column -->
+              <div class="col">
+                <!-- Default input -->
+                <input mdbInputDirective type="text" class="form-control" placeholder="Title" formControlName="title">
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col">
+                <!-- Default input -->
+                <input mdbInputDirective type="text" class="form-control" placeholder="Description" formControlName="description">
+              </div>
+              <!-- Grid column -->
+              <div class="col">
+                <button [disabled]="!taskForm.valid" type="submit" mdbBtn color="danger" mdbWavesEffect>{{ isEdit ? 'Update' : 'Add' }}</button>
+                <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="onCancel()">Cancel</button>
+              </div>
+            </div>
+            <!-- Grd row -->
+          </form>
+          <!-- Default form row -->
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>
+
+<button mdbBtn type="button" color="primary" mdbWavesEffect (click)="onAddTask()">Add Task</button>
